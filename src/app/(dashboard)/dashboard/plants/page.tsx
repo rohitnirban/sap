@@ -40,7 +40,7 @@ const plants = [
   }
 ]
 
-export default function page() {
+export default function Page() {
   return (
     <>
       <ScrollArea className='h-full'>

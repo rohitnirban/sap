@@ -16,7 +16,7 @@ import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useToast } from '@/components/ui/use-toast';
 
-const page = () => {
+const Page = () => {
 
     const [username, setUsername] = useState('');
     const [usernameMessage, setUsernameMessage] = useState('');
@@ -198,4 +198,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

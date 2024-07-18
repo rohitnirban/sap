@@ -6,8 +6,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Bell, Gift, Heart, Image, MessageCircle, Search, Share, Vote } from "lucide-react";
 
 export default function Page() {
-
-
   return (
     <ScrollArea className="h-full">
       <div className="flex min-h-screen flex-col bg-background">
