@@ -72,22 +72,6 @@ const Page = () => {
     setMapLoaded(true);
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const initialMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
-      const initialTrees = JSON.parse(localStorage.getItem('trees') || JSON.stringify(treeData));
-      setMarkers(initialMarkers);
-      setTrees(initialTrees);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('markers', JSON.stringify(markers));
-      localStorage.setItem('trees', JSON.stringify(trees));
-    }
-  }, [markers, trees]);
-
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
     if (!selectedTree) {
       toast({
@@ -99,7 +83,7 @@ const Page = () => {
     }
 
     // Get the selected tree data
-    const selectedTreeData = trees.find((tree: any) => tree.name === selectedTree);
+    const selectedTreeData = trees.find(tree => tree.name === selectedTree);
 
     if (selectedTreeData && selectedTreeData.left <= 0) {
       toast({
@@ -135,8 +119,8 @@ const Page = () => {
     setMarkers(prevMarkers => [...prevMarkers, clickedPosition]);
 
     // Decrease the count of the selected tree
-    setTrees((prevTrees: any) =>
-      prevTrees.map((tree: any) =>
+    setTrees(prevTrees =>
+      prevTrees.map(tree =>
         tree.name === selectedTree ? { ...tree, left: tree.left - 1 } : tree
       )
     );
@@ -177,7 +161,7 @@ const Page = () => {
         <div
           className={`content oveflow-x-auto absolute right-0 top-36 grid h-[60vh] w-[38vw] transform grid-cols-3 items-center justify-center gap-4 overflow-x-auto rounded-l-lg bg-white p-4 transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-[50rem]'}`}
         >
-          {trees.map((tree: any, index: any) => (
+          {trees.map((tree, index) => (
             <div
               key={index}
               className={`flex h-[150px] w-[150px] flex-col items-center justify-center  rounded-lg border p-2 text-center ${selectedTree === tree.name ? 'border-blue-500' : 'border-gray-300'
