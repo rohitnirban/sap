@@ -47,7 +47,6 @@ const Page = () => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [markers, setMarkers] = useState<MarkerPosition[]>([]);
   const [selectedTree, setSelectedTree] = useState('');
-  const [selectedTreePrice, setSelectedTreePrice] = useState(0);
   const [selectedTreeImage, setSelectedTreeImage] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [trees, setTrees] = useState(treeData);
@@ -58,11 +57,9 @@ const Page = () => {
 
   const handleTreeClick = (
     treeName: string,
-    treePrice: number,
     treeImage: string
   ) => {
     setSelectedTree(treeName);
-    setSelectedTreePrice(treePrice);
     setSelectedTreeImage(treeImage);
   }
 
@@ -167,7 +164,7 @@ const Page = () => {
               className={`flex h-[150px] w-[150px] flex-col items-center justify-center  rounded-lg border p-2 text-center ${selectedTree === tree.name ? 'border-blue-500' : 'border-gray-300'
                 }`}
               onClick={() =>
-                handleTreeClick(tree.name, tree.price, tree.image)
+                handleTreeClick(tree.name, tree.image)
               }
             >
               <img
