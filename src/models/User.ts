@@ -10,7 +10,6 @@ export interface User extends Document {
     verifyCode: string;
     verifyCodeExpiry: Date;
     isVerified: boolean;
-    orders: Order[];
     plants: Plant[]
     role: string;
     totalAmount:number;
@@ -64,7 +63,6 @@ const UserSchema: Schema<User> = new Schema({
         default: 'user',
         enum: ['user', 'admin', 'nursery']
     },
-    orders: [OrderSchema],
     plants: [PlantSchema]
 });
 
