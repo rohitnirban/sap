@@ -69,7 +69,7 @@ const Page = () => {
                     <img src="https://indian-oil-admin.pages.dev/assets/favicon-9BK-ZSO9.jpeg" alt="Sustathon Logo" className="w-20 h-20" />
                     <h2 className="text-2xl font-bold text-center">Sign in to your account</h2>
                     <p className="text-sm text-center text-gray-600">
-                        Don't have an account?
+                        Don&apos;t have an account?
                         <Link href="/sign-up" className="text-blue-600">
                             Sign up
                         </Link>
