@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, Marker, Polygon } from '@react-google-maps/api';
@@ -43,6 +43,7 @@ const options = {
 
 const Page = () => {
   const { toast } = useToast();
+
   const [mapLoaded, setMapLoaded] = useState(false);
   const [markers, setMarkers] = useState<MarkerPosition[]>([]);
   const [selectedTree, setSelectedTree] = useState('');
@@ -50,6 +51,26 @@ const Page = () => {
   const [selectedTreeImage, setSelectedTreeImage] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [trees, setTrees] = useState(treeData);
+
+  const toggleContent = () => {
+    setIsOpen(!isOpen);
+  }
+
+  const handleTreeClick = (
+    treeName: string,
+    treePrice: number,
+    treeImage: string
+  ) => {
+    setSelectedTree(treeName);
+    setSelectedTreePrice(treePrice);
+    setSelectedTreeImage(treeImage);
+  }
+
+  const mapRef = useRef<GoogleMap | null>(null);
+
+  const handleMapLoad = useCallback(() => {
+    setMapLoaded(true);
+  }, []);
 
   useEffect(() => {
     const initialMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
@@ -60,31 +81,8 @@ const Page = () => {
 
   useEffect(() => {
     localStorage.setItem('markers', JSON.stringify(markers));
-  }, [markers]);
-
-  useEffect(() => {
     localStorage.setItem('trees', JSON.stringify(trees));
-  }, [trees]);
-
-  const toggleContent = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleTreeClick = (
-    treeName: string,
-    treePrice: number,
-    treeImage: string
-  ) => {
-    setSelectedTree(treeName);
-    setSelectedTreePrice(treePrice);
-    setSelectedTreeImage(treeImage);
-  };
-
-  const mapRef = useRef<GoogleMap | null>(null);
-
-  const handleMapLoad = useCallback(() => {
-    setMapLoaded(true);
-  }, []);
+  }, [markers, trees]);
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
     if (!selectedTree) {
@@ -96,6 +94,7 @@ const Page = () => {
       return;
     }
 
+    // Get the selected tree data
     const selectedTreeData = trees.find((tree: any) => tree.name === selectedTree);
 
     if (selectedTreeData && selectedTreeData.left <= 0) {
@@ -113,6 +112,7 @@ const Page = () => {
       image: selectedTreeImage
     };
 
+    // Check if the clicked position is inside the polygon
     const isInsidePolygon = google.maps.geometry.poly.containsLocation(
       new google.maps.LatLng(clickedPosition.lat, clickedPosition.lng),
       new google.maps.Polygon({ paths })
@@ -127,8 +127,10 @@ const Page = () => {
       return;
     }
 
+    // Add marker
     setMarkers(prevMarkers => [...prevMarkers, clickedPosition]);
 
+    // Decrease the count of the selected tree
     setTrees((prevTrees: any) =>
       prevTrees.map((tree: any) =>
         tree.name === selectedTree ? { ...tree, left: tree.left - 1 } : tree
@@ -189,6 +191,10 @@ const Page = () => {
               <p className='text-xs text-gray-500'>Left: {tree.left}</p>
             </div>
           ))}
+          {/* Button to unselect plant */}
+          <Button onClick={() => setSelectedTree('')}>
+            Unselect Plant
+          </Button>
         </div>
       </div>
     </div>
