@@ -73,15 +73,19 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    const initialMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
-    const initialTrees = JSON.parse(localStorage.getItem('trees') || JSON.stringify(treeData));
-    setMarkers(initialMarkers);
-    setTrees(initialTrees);
+    if (typeof window !== 'undefined') {
+      const initialMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
+      const initialTrees = JSON.parse(localStorage.getItem('trees') || JSON.stringify(treeData));
+      setMarkers(initialMarkers);
+      setTrees(initialTrees);
+    }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('markers', JSON.stringify(markers));
-    localStorage.setItem('trees', JSON.stringify(trees));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('markers', JSON.stringify(markers));
+      localStorage.setItem('trees', JSON.stringify(trees));
+    }
   }, [markers, trees]);
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
