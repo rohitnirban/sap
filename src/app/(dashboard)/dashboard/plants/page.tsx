@@ -56,7 +56,7 @@ export default function Page() {
             <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
               <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-7">
                 {plants.map((plant, index) => {
-                  return <div className="bg-background rounded-lg overflow-hidden shadow-sm transition-all">
+                  return <div className="bg-background rounded-lg overflow-hidden shadow-sm transition-all" key={index}>
                     <Link href="#" className="block" prefetch={false}>
                       <img src={plant.image} alt={`plant ${index}`} width={300} height={300} className="w-full h-60 object-contain" />
                       <div className="p-4">
