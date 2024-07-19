@@ -40,9 +40,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   searchKey: string;
   pageNo: number;
-  totalUsers: number;
   pageSizeOptions?: number[];
-  pageCount: number;
   searchParams?: {
     [key: string]: string | string[] | undefined;
   };
@@ -53,8 +51,6 @@ export function EmployeeTable<TData, TValue>({
   data,
   pageNo,
   searchKey,
-  totalUsers,
-  pageCount,
   pageSizeOptions = [10, 20, 30, 40, 50]
 }: DataTableProps<TData, TValue>) {
   const router = useRouter();
@@ -114,7 +110,6 @@ export function EmployeeTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
-    pageCount: pageCount ?? -1,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     state: {

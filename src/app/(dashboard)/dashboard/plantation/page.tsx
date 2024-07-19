@@ -32,7 +32,8 @@ const paths = [
 ];
 
 const options = {
-  strokeColor: "blue",
+  strokeColor: "green",
+  fillColor: "#04ff00",
   strokeOpacity: 1,
   strokeWeight: 1,
   clickable: false,
@@ -123,6 +124,21 @@ const Page = () => {
     );
   };
 
+  const [selectedMarker, setSelectedMarker] = useState<number | null>(null);
+  const [isWatering, setIsWatering] = useState(false);
+
+  const handleMarkerClick = (index: number) => {
+    setSelectedMarker(index);
+  };
+
+  const handleWaterClick = () => {
+    setIsWatering(true);
+    setTimeout(() => {
+      setIsWatering(false);
+      setSelectedMarker(null);
+    }, 10000); // 10 seconds for the animation duration
+  };
+
   return (
     <div className='-z-10 border-none outline-none'>
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API!}>
@@ -137,13 +153,29 @@ const Page = () => {
           {mapLoaded && (
             <>
               {markers.map((marker, index) => (
-                <Marker key={index} position={marker} icon={{ url: marker.image, scaledSize: new google.maps.Size(64, 64) }} />
+                <React.Fragment key={index}>
+                  <Marker
+                    position={marker}
+                    icon={{ url: marker.image, scaledSize: new google.maps.Size(64, 64) }}
+                    onClick={() => handleMarkerClick(index)}
+                  />
+                  {selectedMarker === index && !isWatering && (
+                    <WaterButtonOverlay
+                      position={marker}
+                      onWaterClick={handleWaterClick}
+                    />
+                  )}
+                  {selectedMarker === index && isWatering && (
+                    <WateringAnimationOverlay position={marker} />
+                  )}
+                </React.Fragment>
               ))}
               <Polygon paths={paths} options={options} />
             </>
           )}
         </GoogleMap>
       </LoadScript>
+
       <div className='fixed top-10 right-0'>
         <div
           className='button absolute right-0 top-20 rounded-l-full bg-black p-4'
@@ -187,3 +219,45 @@ const Page = () => {
 };
 
 export default Page;
+
+
+import { OverlayView } from '@react-google-maps/api';
+
+interface WaterButtonOverlayProps {
+  position: google.maps.LatLngLiteral;
+  onWaterClick: () => void;
+}
+
+const WaterButtonOverlay: React.FC<WaterButtonOverlayProps> = ({ position, onWaterClick }) => {
+  return (
+    <OverlayView
+      position={position}
+      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+    >
+      <div style={{ position: 'absolute', transform: 'translate(-50%, -100%)' }} className='mt-10'>
+        <Button onClick={onWaterClick}>Water Plant</Button>
+      </div>
+    </OverlayView>
+  );
+};
+
+
+interface WateringAnimationOverlayProps {
+  position: google.maps.LatLngLiteral;
+}
+
+const WateringAnimationOverlay: React.FC<WateringAnimationOverlayProps> = ({ position }) => {
+  return (
+    <OverlayView
+      position={position}
+      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+    >
+      <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }} className='mt-48 -ml-40'>
+        <div className='watering-animation'>
+          <div className="water-jar"></div>
+          <div className="water"></div>
+        </div>
+      </div>
+    </OverlayView>
+  );
+};

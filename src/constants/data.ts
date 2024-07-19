@@ -93,22 +93,9 @@ export const users: User[] = [
 ];
 
 export type Employee = {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone: string;
-  gender: string;
-  date_of_birth: string; // Consider using a proper date type if possible
-  street: string;
-  city: string;
-  state: string;
-  country: string;
-  zipcode: string;
-  longitude?: number; // Optional field
-  latitude?: number; // Optional field
-  job: string;
-  profile_picture?: string | null; // Profile picture can be a string (URL) or null (if no picture)
+  name: string;
+  region: string;
+  score: number;
 };
 
 export const navItems: NavItem[] = [
@@ -131,10 +118,10 @@ export const navItems: NavItem[] = [
     label: 'caring'
   },
   {
-    title: 'Your Plants',
-    href: '/dashboard/your-plants',
-    icon: 'Plant',
-    label: 'your-plants'
+    title: 'Inventory',
+    href: '/dashboard/inventory',
+    icon: 'Inventory',
+    label: 'inventory'
   },
   {
     title: 'Soil Data',
@@ -143,10 +130,16 @@ export const navItems: NavItem[] = [
     label: 'Soil Data'
   },
   {
-    title: 'Map',
-    href: '/dashboard/map',
+    title: 'Plantation',
+    href: '/dashboard/plantation',
     icon: 'map',
-    label: 'map'
+    label: 'Plantation'
+  },
+  {
+    title: 'Plantarium',
+    href: '/dashboard/plantarium',
+    icon: 'Plantarium',
+    label: 'Plantarium'
   },
   {
     title: 'History',
@@ -165,5 +158,11 @@ export const navItems: NavItem[] = [
     href: '/dashboard/rewards',
     icon: 'Rewards',
     label: 'rewards'
+  },
+  {
+    title: 'Ranking',
+    href: '/dashboard/rankings',
+    icon: 'Ranking',
+    label: 'rankings'
   }
 ];

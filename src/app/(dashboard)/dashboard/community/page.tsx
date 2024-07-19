@@ -7,9 +7,25 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Bell, Image, Heart, MessageCircle, Search, Share } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import axios from "axios";
+import dayjs from 'dayjs';
+import { getInitials } from "@/helpers/extractInitials";
+
+interface Posts {
+  username: string;
+  name: string;
+  content: string;
+  hashtags: string;
+  image: string;
+  createdAt:string;
+}
 
 export default function Page() {
+
+  const { toast } = useToast();
+
   const { data: session } = useSession();
   const [content, setContent] = useState('');
   const [hashtags, setHashtags] = useState('');
@@ -31,39 +47,68 @@ export default function Page() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!content || !hashtags || !image) {
-      alert("All fields are required!");
       return;
     }
 
     const formData = new FormData();
     formData.append("content", content);
     formData.append("hashtags", hashtags);
-    if(session){
+    if (session) {
       formData.append("username", session.user?.name || '');
       formData.append("name", session.user?.name || '');
     }
     formData.append("image", image);
 
     try {
-      const response = await fetch("/api/community/create", {
+      const response = await fetch("http://localhost:1000/api/v1/community/create", {
         method: "POST",
         body: formData,
       });
 
       const result = await response.json();
 
+      console.log(result);
+
       if (response.ok) {
-        alert("Post Created Successfully");
+        toast({
+          title: "Success",
+          description: "Post Created Successfully",
+        })
         setContent('');
         setHashtags('');
         setImage(null);
+        window.location.reload();
       } else {
-        alert(`Error: ${result.message}`);
+        toast({
+          title: "Error",
+          description: `Error ${result.message}`,
+          variant: "destructive"
+        })
       }
-    } catch (error:any) {
-      alert(`Error: ${error.message}`);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: `Error ${error.message}`,
+        variant: "destructive"
+      })
     }
   };
+
+
+  const [posts, setPosts] = useState<Posts[]>([]);
+
+  const fetchPost = async () => {
+    try {
+      const response = await axios.get(`http://localhost:1000/api/v1/community/all`);
+      setPosts(response.data.message);
+    } catch (error) {
+
+    }
+  }
+
+  useEffect(() => {
+    fetchPost();
+  }, [])
 
   if (session) {
     return (
@@ -136,13 +181,13 @@ export default function Page() {
                     <Card key={index} className="border-0">
                       <div className="flex items-start gap-4 p-4">
                         <Avatar className="h-10 w-10">
-                          <AvatarImage src={post.avatar} />
-                          <AvatarFallback>{post.initials}</AvatarFallback>
+                          <AvatarImage src={getInitials(post.name)} />
+                          <AvatarFallback>{getInitials(post.name)}</AvatarFallback>
                         </Avatar>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-2">
                             <div className="text-sm font-medium">{post.name}</div>
-                            <div className="text-xs text-muted-foreground">{post.handle} · {post.time}</div>
+                            {dayjs(post.createdAt).format('MMM D, YYYY h:mm A')}
                           </div>
                           <CardContent className="p-0">
                             <p>{post.content}</p>

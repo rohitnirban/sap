@@ -23,6 +23,7 @@ import {
   LucideIcon,
   LucideProps,
   Map,
+  Medal,
   Moon,
   MoreVertical,
   Pizza,
@@ -31,6 +32,7 @@ import {
   Sprout,
   SunMedium,
   Trash,
+  Truck,
   Twitter,
   User,
   User2Icon,
@@ -93,5 +95,8 @@ export const Icons = {
   history:History,
   SoilData:Leaf,
   Rewards:IndianRupee,
-  Caring:HandHeart
+  Caring:HandHeart,
+  Plantarium:Image,
+  Ranking:Medal,
+  Inventory:Truck,
 };
