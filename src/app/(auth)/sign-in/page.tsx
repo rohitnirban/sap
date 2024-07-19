@@ -63,8 +63,8 @@ const Page = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[80vh] bg-gray-50 mt-10">
-            <div className="w-full my-10 max-w-md p-8 space-y-8 rounded-md shadow-md">
+        <div className="flex flex-col items-center justify-center min-h-[80vh] bg-green-700 pt-20">
+            <div className="w-full my-10 max-w-md p-8 space-y-8 rounded-md shadow-md bg-white">
                 <div className="flex flex-col items-center space-y-4">
                     <img src="https://indian-oil-admin.pages.dev/assets/favicon-9BK-ZSO9.jpeg" alt="Sustainathon Logo" className="w-20 h-20" />
                     <h2 className="text-2xl font-bold text-center">Sign in to your account</h2>
