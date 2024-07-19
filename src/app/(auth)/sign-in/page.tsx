@@ -92,7 +92,7 @@ const Page = () => {
                                             />
                                         </FormControl>
                                         <p className={`text-sm text-green-500`}>
-                                            Use 'testing' as username
+                                            Use &apos;testing&apos; as username
                                         </p>
                                         <FormMessage />
                                     </FormItem>
@@ -114,7 +114,7 @@ const Page = () => {
                                             />
                                         </FormControl>
                                         <p className={`text-sm text-green-500`}>
-                                            Use 'testing' as password
+                                            Use &apos;testing&apos; as password
                                         </p>
                                         <FormMessage />
                                     </FormItem>

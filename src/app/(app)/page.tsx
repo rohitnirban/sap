@@ -15,7 +15,7 @@ const Page = () => {
         />
       </div>
       <div className='relative z-10 flex flex-col items-center justify-center h-full'>
-        <h1 className='text-5xl font-bold text-white leading-relaxed'>"Grow Green, Live Clean<br/>Plant Trees, Build Dreams"</h1>
+        <h1 className='text-5xl font-bold text-white leading-relaxed'>&ldquo;Grow Green, Live Clean<br/>Plant Trees, Build Dreams&rdquo;</h1>
         <div className='mt-10'>
           <Button className='bg-green-700 border border-green-700 text-lg'>Plant Now</Button>
         </div>
