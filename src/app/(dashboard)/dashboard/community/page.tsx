@@ -1,116 +1,188 @@
+'use client';
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Bell, Gift, Heart, Image, MessageCircle, Search, Share, Vote } from "lucide-react";
+import { Bell, Image, Heart, MessageCircle, Search, Share } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useState, useRef } from "react";
 
 export default function Page() {
-  return (
-    <ScrollArea className="h-full">
-      <div className="flex min-h-screen flex-col bg-background">
-        <header className="sticky top-0 z-10 flex h-14 items-center justify-between border-b bg-background px-4 sm:px-6 shadow-md">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search Community"
-              className="w-full rounded-full bg-muted pl-8 pr-4 focus:bg-background focus:outline-none"
-            />
-          </div>
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <Bell className="h-5 w-5" />
-              <span className="sr-only">Notifications</span>
-            </Button>
-          </div>
-        </header>
-        <div className="flex flex-1">
-          <main className="flex-1 border-r border-l">
-            <div className="grid gap-4 p-4 sm:p-6">
-              <div className="grid gap-4">
-                <div className="flex items-center gap-2">
-                  <Avatar className="h-12 w-12">
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>AC</AvatarFallback>
-                  </Avatar>
+  const { data: session } = useSession();
+  const [content, setContent] = useState('');
+  const [hashtags, setHashtags] = useState('');
+  const [image, setImage] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  const handleFileInputClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!content || !hashtags || !image) {
+      alert("All fields are required!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("content", content);
+    formData.append("hashtags", hashtags);
+    if(session){
+      formData.append("username", session.user?.name || '');
+      formData.append("name", session.user?.name || '');
+    }
+    formData.append("image", image);
+
+    try {
+      const response = await fetch("/api/community/create", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("Post Created Successfully");
+        setContent('');
+        setHashtags('');
+        setImage(null);
+      } else {
+        alert(`Error: ${result.message}`);
+      }
+    } catch (error:any) {
+      alert(`Error: ${error.message}`);
+    }
+  };
+
+  if (session) {
+    return (
+      <ScrollArea className="h-full">
+        <div className="flex min-h-screen flex-col bg-background">
+          <header className="sticky top-0 z-10 flex h-14 items-center justify-between border-b bg-background px-4 sm:px-6 shadow-md">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search Community"
+                className="w-full rounded-full bg-muted pl-8 pr-4 focus:bg-background focus:outline-none"
+              />
+            </div>
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <Bell className="h-5 w-5" />
+                <span className="sr-only">Notifications</span>
+              </Button>
+            </div>
+          </header>
+          <div className="flex flex-1">
+            <main className="flex-1 border-r border-l">
+              <div className="grid gap-4 p-4 sm:p-6">
+                <form onSubmit={handleSubmit} className="grid gap-4">
+                  <div className="flex items-center gap-2">
+                    <Avatar>
+                      <AvatarImage
+                        src={session.user?.image ?? ''}
+                        alt={session.user?.name ?? ''}
+                      />
+                      <AvatarFallback>{session.user?.name?.[0]}</AvatarFallback>
+                    </Avatar>
+                    <Input
+                      type="text"
+                      placeholder="What's happening?"
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
+                      className="flex-1 rounded-full bg-muted px-4 py-2 focus:bg-background focus:outline-none"
+                    />
+                  </div>
                   <Input
                     type="text"
-                    placeholder="What's happening?"
+                    placeholder="Hashtags"
+                    value={hashtags}
+                    onChange={(e) => setHashtags(e.target.value)}
                     className="flex-1 rounded-full bg-muted px-4 py-2 focus:bg-background focus:outline-none"
                   />
-                </div>
-                <div className="flex justify-between">
-                  <div className="flex items-center gap-2">
-                    <Button variant="ghost" size="icon" className="rounded-full">
-                      <Image className="h-5 w-5" />
-                      <span className="sr-only">Add image</span>
-                    </Button>
-                    <Button variant="ghost" size="icon" className="rounded-full">
-                      <Gift className="h-5 w-5" />
-                      <span className="sr-only">Add GIF</span>
-                    </Button>
-                    <Button variant="ghost" size="icon" className="rounded-full">
-                      <Vote className="h-5 w-5" />
-                      <span className="sr-only">Add poll</span>
+                  <div className="flex justify-between">
+                    <div className="flex items-center gap-2">
+                      <Button variant="ghost" size="icon" className="rounded-full" onClick={handleFileInputClick}>
+                        <Image className="h-5 w-5" />
+                        <span className="sr-only">Add image</span>
+                      </Button>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />
+                    </div>
+                    <Button type="submit" className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
+                      Post
                     </Button>
                   </div>
-                  <Button className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
-                    Post
-                  </Button>
+                </form>
+                <div className="grid gap-4 max-w-3xl mx-auto">
+                  {posts.map((post, index) => (
+                    <Card key={index} className="border-0">
+                      <div className="flex items-start gap-4 p-4">
+                        <Avatar className="h-10 w-10">
+                          <AvatarImage src={post.avatar} />
+                          <AvatarFallback>{post.initials}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex flex-col">
+                          <div className="flex items-center gap-2">
+                            <div className="text-sm font-medium">{post.name}</div>
+                            <div className="text-xs text-muted-foreground">{post.handle} · {post.time}</div>
+                          </div>
+                          <CardContent className="p-0">
+                            <p>{post.content}</p>
+                            <p className="text-blue-700 mt-4">{post.hashtags}</p>
+                            {post.image && (
+                              <img
+                                src={post.image}
+                                alt="Post Image"
+                                width={800}
+                                height={450}
+                                className="rounded-lg mt-4 object-cover w-full aspect-[16/9]"
+                              />
+                            )}
+                          </CardContent>
+                          <CardFooter className="flex items-center justify-between p-0 mt-2">
+                            <Button variant="ghost" size="icon" className="rounded-full">
+                              <Heart className="h-5 w-5" />
+                              <span className="sr-only">Like</span>
+                            </Button>
+                            <Button variant="ghost" size="icon" className="rounded-full">
+                              <MessageCircle className="h-5 w-5" />
+                              <span className="sr-only">Comment</span>
+                            </Button>
+                            <Button variant="ghost" size="icon" className="rounded-full">
+                              <Share className="h-5 w-5" />
+                              <span className="sr-only">Share</span>
+                            </Button>
+                          </CardFooter>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
                 </div>
               </div>
-              <div className="grid gap-4 max-w-3xl mx-auto">
-                {posts.map((post, index) => (
-                  <Card key={index} className="border-0">
-                    <div className="flex items-start gap-4 p-4">
-                      <Avatar className="h-10 w-10">
-                        <AvatarImage src={post.avatar} />
-                        <AvatarFallback>{post.initials}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex flex-col">
-                        <div className="flex items-center gap-2">
-                          <div className="text-sm font-medium">{post.name}</div>
-                          <div className="text-xs text-muted-foreground">{post.handle} · {post.time}</div>
-                        </div>
-                        <CardContent className="p-0">
-                          <p>{post.content}</p>
-                          <p className="text-blue-700 mt-4">{post.hashtags}</p>
-                          {post.image && (
-                            <img
-                              src={post.image}
-                              alt="Post Image"
-                              width={800}
-                              height={450}
-                              className="rounded-lg mt-4 object-cover w-full aspect-[16/9]"
-                            />
-                          )}
-                        </CardContent>
-                        <CardFooter className="flex items-center justify-between p-0 mt-2">
-                          <Button variant="ghost" size="icon" className="rounded-full">
-                            <Heart className="h-5 w-5" />
-                            <span className="sr-only">Like</span>
-                          </Button>
-                          <Button variant="ghost" size="icon" className="rounded-full">
-                            <MessageCircle className="h-5 w-5" />
-                            <span className="sr-only">Comment</span>
-                          </Button>
-                          <Button variant="ghost" size="icon" className="rounded-full">
-                            <Share className="h-5 w-5" />
-                            <span className="sr-only">Share</span>
-                          </Button>
-                        </CardFooter>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </main>
+            </main>
+          </div>
         </div>
-      </div>
-    </ScrollArea>
-  );
+      </ScrollArea>
+    );
+  }
 }
 
 const posts = [

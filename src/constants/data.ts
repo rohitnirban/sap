@@ -121,8 +121,26 @@ export const navItems: NavItem[] = [
   {
     title: 'Plants',
     href: '/dashboard/plants',
-    icon: 'plant',
+    icon: 'Plant',
     label: 'plants'
+  },
+  {
+    title: 'Caring',
+    href: '/dashboard/caring',
+    icon: 'Caring',
+    label: 'caring'
+  },
+  {
+    title: 'Your Plants',
+    href: '/dashboard/your-plants',
+    icon: 'Plant',
+    label: 'your-plants'
+  },
+  {
+    title: 'Soil Data',
+    href: '/dashboard/soil-data',
+    icon: 'SoilData',
+    label: 'Soil Data'
   },
   {
     title: 'Map',
@@ -131,22 +149,10 @@ export const navItems: NavItem[] = [
     label: 'map'
   },
   {
-    title: 'Employee',
-    href: '/dashboard/employee',
-    icon: 'employee',
-    label: 'employee'
-  },
-  {
-    title: 'Profile',
-    href: '/dashboard/profile',
-    icon: 'profile',
-    label: 'profile'
-  },
-  {
-    title: 'Kanban',
-    href: '/dashboard/kanban',
-    icon: 'kanban',
-    label: 'kanban'
+    title: 'History',
+    href: '/dashboard/history',
+    icon: 'history',
+    label: 'history'
   },
   {
     title: 'Community',
@@ -155,9 +161,9 @@ export const navItems: NavItem[] = [
     label: 'community'
   },
   {
-    title: 'Login',
-    href: '/',
-    icon: 'login',
-    label: 'login'
+    title: 'Rewards',
+    href: '/dashboard/rewards',
+    icon: 'Rewards',
+    label: 'rewards'
   }
 ];

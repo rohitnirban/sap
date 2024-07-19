@@ -14,8 +14,8 @@ interface MarkerPosition {
 }
 
 const containerStyle = {
-  width: '1250px',
-  height: '640px',
+  width: '81vw',
+  height: '95vh',
   marginTop: '-10px'
 };
 
@@ -124,7 +124,7 @@ const Page = () => {
   };
 
   return (
-    <div className='-z-10'>
+    <div className='-z-10 border-none outline-none'>
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API!}>
         <GoogleMap
           ref={mapRef}

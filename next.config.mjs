@@ -26,6 +26,10 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "www.rba.go.ke",
             },
+            {
+                protocol: "https",
+                hostname: "muffingroup.com",
+            },
         ],
     },
 };

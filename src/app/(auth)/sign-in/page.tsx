@@ -16,7 +16,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 
 const Page = () => {
-    
+
     const router = useRouter();
     const { toast } = useToast();
 
@@ -57,14 +57,14 @@ const Page = () => {
 
         setIsSubmitting(false);
 
-        if(result?.url){
+        if (result?.url) {
             router.replace(`/dashboard`)
         }
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[80vh] bg-gray-50">
-            <div className="w-full my-10 max-w-md p-8 space-y-8 bg-white rounded-md shadow-md">
+        <div className="flex flex-col items-center justify-center min-h-[80vh] bg-gray-50 mt-10">
+            <div className="w-full my-10 max-w-md p-8 space-y-8 rounded-md shadow-md">
                 <div className="flex flex-col items-center space-y-4">
                     <img src="https://indian-oil-admin.pages.dev/assets/favicon-9BK-ZSO9.jpeg" alt="Sustainathon Logo" className="w-20 h-20" />
                     <h2 className="text-2xl font-bold text-center">Sign in to your account</h2>
@@ -91,6 +91,9 @@ const Page = () => {
                                                 {...field}
                                             />
                                         </FormControl>
+                                        <p className={`text-sm text-green-500`}>
+                                            Use 'testing' as username
+                                        </p>
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -110,6 +113,9 @@ const Page = () => {
                                                 {...field}
                                             />
                                         </FormControl>
+                                        <p className={`text-sm text-green-500`}>
+                                            Use 'testing' as password
+                                        </p>
                                         <FormMessage />
                                     </FormItem>
                                 )}
