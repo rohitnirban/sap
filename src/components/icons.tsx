@@ -1,3 +1,4 @@
+import { IconBrandYoutube } from '@tabler/icons-react';
 import {
   AlertTriangle,
   ArrowRight,
@@ -99,4 +100,5 @@ export const Icons = {
   Plantarium:Image,
   Ranking:Medal,
   Inventory:Truck,
+  Livestream:IconBrandYoutube
 };

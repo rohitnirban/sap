@@ -103,7 +103,7 @@ export const navItems: NavItem[] = [
     title: 'Dashboard',
     href: '/dashboard',
     icon: 'dashboard',
-    label: 'Dashboard'
+    label: 'dashboard'
   },
   {
     title: 'Plants',
@@ -127,19 +127,19 @@ export const navItems: NavItem[] = [
     title: 'Soil Data',
     href: '/dashboard/soil-data',
     icon: 'SoilData',
-    label: 'Soil Data'
+    label: 'soil-data'
   },
   {
     title: 'Plantation',
     href: '/dashboard/plantation',
     icon: 'map',
-    label: 'Plantation'
+    label: 'plantation'
   },
   {
     title: 'Plantarium',
     href: '/dashboard/plantarium',
     icon: 'Plantarium',
-    label: 'Plantarium'
+    label: 'plantarium'
   },
   {
     title: 'History',
@@ -164,5 +164,11 @@ export const navItems: NavItem[] = [
     href: '/dashboard/rankings',
     icon: 'Ranking',
     label: 'rankings'
+  },
+  {
+    title: 'Livestream',
+    href: '/dashboard/livestream',
+    icon: 'Livestream',
+    label: 'livestream'
   }
 ];
