@@ -104,7 +104,7 @@ export default function Apps() {
                                             <p className="text-muted-foreground text-sm mt-1"><span className="font-bold text-black">Planted By</span> {plant.details}</p>
                                             <Dialog>
                                                 <DialogTrigger asChild>
-                                                    <Button>Get Details</Button>
+                                                    <Button className='w-full'>Get Details</Button>
                                                 </DialogTrigger>
                                                 <DialogContent>
                                                     <ul className='no-scrollbar grid gap-4 p-4 grid-cols-1'>

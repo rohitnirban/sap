@@ -55,7 +55,7 @@ export default function Page() {
                         <p className="text-muted-foreground text-sm mt-1">{plant.credits} Credits</p>
                         <AlertDialog>
                           <AlertDialogTrigger>
-                            <Button className='mt-2'>Purchase Now</Button>
+                            <Button className='mt-2 w-full'>Get Caring</Button>
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>
