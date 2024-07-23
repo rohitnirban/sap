@@ -15,8 +15,8 @@ const Navbar = () => {
         <nav className="bg-white w-[95%] fixed z-20 top-6 start-0 p-2 mx-6 rounded-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="https://indian-oil-admin.pages.dev/assets/favicon-9BK-ZSO9.jpeg" className="h-8 rounded-full" alt="Sustainathon Logo" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Sustainathon</span>
+                    <img src="https://indian-oil-admin.pages.dev/assets/favicon-9BK-ZSO9.jpeg" className="h-8 rounded-full" alt="VaniKriti Logo" />
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">VaniKriti</span>
                 </Link>
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <Link href="/sign-in">

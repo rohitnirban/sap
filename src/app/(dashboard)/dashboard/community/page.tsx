@@ -12,6 +12,8 @@ import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 import dayjs from 'dayjs';
 import { getInitials } from "@/helpers/extractInitials";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandReddit, IconBrandWhatsapp } from "@tabler/icons-react";
 
 interface Posts {
   username: string;
@@ -19,7 +21,7 @@ interface Posts {
   content: string;
   hashtags: string;
   image: string;
-  createdAt:string;
+  createdAt: string;
 }
 
 export default function Page() {
@@ -212,8 +214,39 @@ export default function Page() {
                               <span className="sr-only">Comment</span>
                             </Button>
                             <Button variant="ghost" size="icon" className="rounded-full">
-                              <Share className="h-5 w-5" />
-                              <span className="sr-only">Share</span>
+                                <Dialog>
+                                  <DialogTrigger asChild>
+                                    <Button variant="ghost" size="icon">
+                                      <Share className="w-5 h-5" />
+                                      <span className="sr-only">Share</span>
+                                    </Button>
+                                  </DialogTrigger>
+                                  <DialogContent className="grid w-[800px] h-64 gap-2 p-4 bg-background rounded-md shadow-lg">
+                                    <div className="text-sm font-medium">Share on</div>
+                                    <div className="grid grid-cols-3 gap-2">
+                                      <p className="cursor-pointer flex flex-col justify-center items-center p-3 rounded-md hover:bg-muted">
+                                        <IconBrandInstagram className="w-10 h-10" />
+                                        <span className="">Instagram</span>
+                                      </p>
+                                      <p className="cursor-pointer flex flex-col justify-center items-center p-3 rounded-md hover:bg-muted">
+                                        <IconBrandFacebook className="w-10 h-10" />
+                                        <span className="">Facebook</span>
+                                      </p>
+                                      <p className="cursor-pointer flex flex-col justify-center items-center p-3 rounded-md hover:bg-muted">
+                                        <IconBrandWhatsapp className="w-10 h-10" />
+                                        <span className="">WhatsApp</span>
+                                      </p>
+                                      <p className="cursor-pointer flex flex-col justify-center items-center p-3 rounded-md hover:bg-muted">
+                                        <IconBrandLinkedin className="w-10 h-10" />
+                                        <span className="">LinkedIn</span>
+                                      </p>
+                                      <p className="cursor-pointer flex flex-col justify-center items-center p-3 rounded-md hover:bg-muted">
+                                        <IconBrandReddit className="w-10 h-10" />
+                                        <span className="">Reddit</span>
+                                      </p>
+                                    </div>
+                                  </DialogContent>
+                                </Dialog>
                             </Button>
                           </CardFooter>
                         </div>

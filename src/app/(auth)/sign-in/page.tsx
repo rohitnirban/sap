@@ -66,7 +66,7 @@ const Page = () => {
         <div className="flex flex-col items-center justify-center min-h-[80vh] bg-green-700 pt-20">
             <div className="w-full my-10 max-w-md p-8 space-y-8 rounded-md shadow-md bg-white">
                 <div className="flex flex-col items-center space-y-4">
-                    <img src="https://indian-oil-admin.pages.dev/assets/favicon-9BK-ZSO9.jpeg" alt="Sustainathon Logo" className="w-20 h-20" />
+                    <img src="https://indian-oil-admin.pages.dev/assets/favicon-9BK-ZSO9.jpeg" alt="VaniKriti Logo" className="w-20 h-20" />
                     <h2 className="text-2xl font-bold text-center">Sign in to your account</h2>
                     <p className="text-sm text-center text-gray-600">
                         Don&apos;t have an account?
@@ -114,7 +114,7 @@ const Page = () => {
                                             />
                                         </FormControl>
                                         <p className={`text-sm text-green-500`}>
-                                            Use &apos;testing&apos; as password
+                                            Use &apos;Testing@123&apos; as password
                                         </p>
                                         <FormMessage />
                                     </FormItem>

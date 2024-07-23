@@ -10,10 +10,7 @@ export interface User extends Document {
     verifyCode: string;
     verifyCodeExpiry: Date;
     isVerified: boolean;
-    plants: Plant[]
     role: string;
-    totalAmount:number;
-    rank:number;
 }
 
 const UserSchema: Schema<User> = new Schema({
@@ -50,20 +47,11 @@ const UserSchema: Schema<User> = new Schema({
         type: Boolean,
         default: false,
     },
-    totalAmount:{
-        type:Number,
-        default:0
-    },
-    rank:{
-        type:Number,
-        default:0
-    },
     role: {
         type: String,
         default: 'user',
         enum: ['user', 'admin', 'nursery']
     },
-    plants: [PlantSchema]
 });
 
 const UserModel = (mongoose.models.User as mongoose.Model<User>) || (mongoose.model<User>("User", UserSchema));

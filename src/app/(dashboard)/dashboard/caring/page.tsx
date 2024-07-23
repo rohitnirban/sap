@@ -29,6 +29,12 @@ const plants = [
     name: "Manure",
     details: "Give protein to your plant"
   },
+  {
+    credits: 35,
+    image: "https://www.treehugger.com/thmb/pQl1YDKynjU8GFrCAMyVYL5GRWA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/wheelbarrow-full-of-manure-545582750-25e7483e24c342cf9a1fe9e9d0a6731c.jpg",
+    name: "Manure",
+    details: "Give protein to your plant"
+  },
 ]
 
 export default function Page() {

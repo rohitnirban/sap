@@ -65,7 +65,7 @@ const Page = () => {
         <div className="flex flex-col items-center justify-center min-h-[80vh] bg-green-700 pt-20">
             <div className="w-full my-10 max-w-md p-8 space-y-8 bg-white rounded-md shadow-md">
                 <div className="flex flex-col items-center space-y-4">
-                    <img src="https://indian-oil-admin.pages.dev/assets/favicon-9BK-ZSO9.jpeg" alt="Sustainathon Logo" className="w-20 h-20" />
+                    <img src="https://indian-oil-admin.pages.dev/assets/favicon-9BK-ZSO9.jpeg" alt="VaniKriti Logo" className="w-20 h-20" />
                     <h2 className="text-2xl font-bold text-center">Verify your account</h2>
                 </div>
                 <Form {...form}>
