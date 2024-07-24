@@ -14,6 +14,7 @@ import dayjs from 'dayjs';
 import { getInitials } from "@/helpers/extractInitials";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandReddit, IconBrandWhatsapp } from "@tabler/icons-react";
+import { base } from "@/lib/base";
 
 interface Posts {
   username: string;
@@ -71,7 +72,7 @@ export default function Page() {
     formData.append("image", image);
 
     try {
-      const response = await fetch("http://localhost:1000/api/v1/community/create", {
+      const response = await fetch(`${base}/api/v1/community/create`, {
         method: "POST",
         body: formData,
       });
@@ -113,7 +114,7 @@ export default function Page() {
   const fetchPost = async () => {
     setIsPostLoading(true);
     try {
-      const response = await axios.get(`http://localhost:1000/api/v1/community/all`);
+      const response = await axios.get(`${base}/api/v1/community/all`);
       setPosts(response.data.message);
       setFilteredPosts(response.data.message.reverse());
     } catch (error) {

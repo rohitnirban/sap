@@ -13,6 +13,7 @@ import { BanknoteIcon, WalletIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { base } from "@/lib/base";
 
 interface History {
   description: string;
@@ -29,7 +30,7 @@ export default function Page() {
 
   const addMoreCredits = async () => {
     try {
-      const response = await axios.post(`http://localhost:1000/api/v1/auth/add/credits/testing/${credits}`);
+      const response = await axios.post(`${base}/api/v1/auth/add/credits/testing/${credits}`);
       toast({
         title: "Success",
         description: response.data.message,
@@ -48,9 +49,9 @@ export default function Page() {
 
   const fetchCreditHistory = async () => {
     try {
-      const response = await axios.get(`http://localhost:1000/api/v1/auth/credits/testing`);
-      console.log("Fetched Credit History:", response.data.message); // Debug log for fetched data
-      setHistory(response.data.message || []); // Set history to an empty array if undefined
+      const response = await axios.get(`${base}/api/v1/auth/credits/testing`);
+      console.log("Fetched Credit History:", response.data.message);
+      setHistory(response.data.message || []);
     } catch (error: any) {
       console.log(error);
       toast({
@@ -65,7 +66,7 @@ export default function Page() {
 
   const fetchUserBalance = async () => {
     try {
-      const response = await axios.get(`http://localhost:1000/api/v1/auth/balance/testing`)
+      const response = await axios.get(`${base}/api/v1/auth/balance/testing`)
       setUserBalance(response.data.message)
       console.log(response.data.message);
 

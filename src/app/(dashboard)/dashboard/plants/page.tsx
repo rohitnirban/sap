@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
+import { base } from '@/lib/base';
 import axios from 'axios';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
@@ -32,7 +33,7 @@ export default function Page() {
   const fetchPlants = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://localhost:1000/api/v1/plant/all`);
+      const response = await axios.get(`${base}/api/v1/plant/all`);
       setPlants(response.data.message);
     } catch (error: any) {
       console.log(error.message);
@@ -54,7 +55,7 @@ export default function Page() {
     setIsPurchasing(true);
     setIsLoading(false);
     try {
-      const response = await axios.post(`http://localhost:1000/api/v1/auth/purchase/plant/testing/${plantID}`);
+      const response = await axios.post(`${base}/api/v1/auth/purchase/plant/testing/${plantID}`);
       toast({
         title: "Success",
         description: response.data.message

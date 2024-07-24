@@ -3,6 +3,7 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
+import { base } from '@/lib/base';
 import axios from 'axios';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
@@ -26,7 +27,7 @@ export default function Page() {
   const fetchInventory = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://localhost:1000/api/v1/auth/inventory/testing`);
+      const response = await axios.get(`${base}/api/v1/auth/inventory/testing`);
       setInventory(response.data.message);
     } catch (error: any) {
       console.log(error.message);

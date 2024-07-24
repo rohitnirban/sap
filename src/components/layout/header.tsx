@@ -9,6 +9,7 @@ import { IconCurrencyDollar } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import { base } from '@/lib/base';
 
 
 export default function Header() {
@@ -19,7 +20,7 @@ export default function Header() {
 
   const fetchUserBalance = async () => {
     try {
-      const response = await axios.get(`http://localhost:1000/api/v1/auth/balance/testing`)
+      const response = await axios.get(`${base}/api/v1/auth/balance/testing`)
       setUserBalance(response.data.message)
       console.log(response.data.message);
 
