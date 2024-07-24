@@ -27,6 +27,7 @@ import {
   Medal,
   Moon,
   MoreVertical,
+  Package,
   Pizza,
   Plus,
   Settings,
@@ -100,5 +101,6 @@ export const Icons = {
   Plantarium:Image,
   Ranking:Medal,
   Inventory:Truck,
-  Livestream:IconBrandYoutube
+  Livestream:IconBrandYoutube,
+  Package:Package,
 };

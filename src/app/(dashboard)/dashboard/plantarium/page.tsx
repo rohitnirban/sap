@@ -73,11 +73,11 @@ export default function Page() {
                                                             <div className="flex items-center gap-4">
                                                                 <Avatar className="w-10 h-10">
                                                                     <AvatarImage src="/palm-tree.png" />
-                                                                    <AvatarFallback>AG</AvatarFallback>
+                                                                    <AvatarFallback>KY</AvatarFallback>
                                                                 </Avatar>
                                                                 <div>
-                                                                    <div className="font-medium">Agent Green</div>
-                                                                    <div className="text-sm text-muted-foreground">San Francisco, CA - July 19, 2024</div>
+                                                                    <div className="font-medium">Kapil Yadav</div>
+                                                                    <div className="text-sm text-muted-foreground">Sector 43, Open Ground</div>
                                                                 </div>
                                                             </div>
                                                             <div className="flex items-center gap-4">
@@ -125,7 +125,7 @@ export default function Page() {
                                                                                 <span className="sr-only">View</span>
                                                                             </Link>
                                                                             <img
-                                                                                src="https://st.depositphotos.com/2632165/4026/i/450/depositphotos_40264933-stock-photo-young-plant.jpg"
+                                                                                src="https://i.ytimg.com/vi/J8QVJsd49os/maxresdefault.jpg"
                                                                                 alt="Plant Progress"
                                                                                 width={600}
                                                                                 height={400}
@@ -142,7 +142,7 @@ export default function Page() {
                                                                                 <span className="sr-only">View</span>
                                                                             </Link>
                                                                             <img
-                                                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV-V60P4f_c5jNgCpiIRubR2kjveE0rgmJ6A&s"
+                                                                                src="https://www.bangaloreagrico.in/wp-content/uploads/2017/05/blackandrews-mango-2years.jpg"
                                                                                 alt="Plant Progress"
                                                                                 width={600}
                                                                                 height={400}
@@ -159,7 +159,7 @@ export default function Page() {
                                                                                 <span className="sr-only">View</span>
                                                                             </Link>
                                                                             <img
-                                                                                src="https://media.istockphoto.com/id/1372896722/photo/potted-banana-plant-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=bioeNAo7zEqALK6jvyGlxeP_Y7h6j0QjuWbwY4E_eP8="
+                                                                                src="https://images.meesho.com/images/products/282536514/xhthd_512.webp"
                                                                                 alt="Plant Progress"
                                                                                 width={600}
                                                                                 height={400}
@@ -176,7 +176,7 @@ export default function Page() {
                                                                                 <span className="sr-only">View</span>
                                                                             </Link>
                                                                             <img
-                                                                                src="https://nurserylive.com/cdn/shop/products/nurserylive-g-hibiscus-gudhal-flower-red-plant-213118.jpg?v=1679750250"
+                                                                                src="https://www.agrifarming.in/wp-content/uploads/Kesar_Mango_Farming1.jpg"
                                                                                 alt="Plant Progress"
                                                                                 width={600}
                                                                                 height={400}

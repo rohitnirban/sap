@@ -72,13 +72,13 @@ const Page = () => {
         <ScrollArea className='h-full'>
             <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
                 <div>
-                    <h1 className='text-2xl font-bold tracking-tight'>Soil Data</h1>
+                    <h1 className='text-2xl font-bold tracking-tight'>Your Rewards</h1>
                     <p className='text-muted-foreground'>
-                        Discover Your Soil&apos;s Secrets, Explore Detailed Data
+                        Explore your rewards you got from planting trees
                     </p>
                 </div>
-                <Separator className='my-4 shadow' />
-                <section className="w-full py-12 md:py-24 lg:py-32">
+                <Separator className='shadow my-4' />
+                <section className="w-full py-8 md:py-12 lg:py-16 px-4 md:px-6">
                     <div className="container grid grid-cols-1 gap-8 px-4 md:grid-cols-2 lg:grid-cols-3 md:px-6">
                         {data.map((reward, index) => {
                             return <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md" key={index}>

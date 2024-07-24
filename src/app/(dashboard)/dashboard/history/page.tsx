@@ -51,7 +51,7 @@ export default function Page() {
     try {
       const response = await axios.get(`${base}/api/v1/auth/credits/testing`);
       console.log("Fetched Credit History:", response.data.message);
-      setHistory(response.data.message || []);
+      setHistory(response.data.message.reverse() || []);
     } catch (error: any) {
       console.log(error);
       toast({

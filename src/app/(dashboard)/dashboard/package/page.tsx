@@ -33,7 +33,7 @@ export default function Page() {
   const fetchPlants = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`${base}/api/v1/plant/all`);
+      const response = await axios.get(`${base}/api/v1/package/all`);
       setPlants(response.data.message);
     } catch (error: any) {
       console.log(error.message);
@@ -55,7 +55,7 @@ export default function Page() {
     setIsPurchasing(true);
     setIsLoading(false);
     try {
-      const response = await axios.post(`${base}/api/v1/auth/purchase/plant/testing/${plantID}`);
+      const response = await axios.post(`${base}/api/v1/auth/purchase/package/testing/${plantID}`);
       toast({
         title: "Success",
         description: response.data.message
@@ -78,9 +78,9 @@ export default function Page() {
       <ScrollArea className='h-full'>
         <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
           <div>
-            <h1 className='text-2xl font-bold tracking-tight'> Discover Our Plant Collection</h1>
+            <h1 className='text-2xl font-bold tracking-tight'> Discover Our Packages Collection</h1>
             <p className='text-muted-foreground'>
-              Explore our diverse range of plants, each with its own unique charm and character.
+              Explore our diverse range of plant packages, each with its own unique charm and character.
             </p>
           </div>
           <Separator />

@@ -119,24 +119,13 @@ export default function page() {
                 </CardContent>
               </Card>
             </div>
-            <div className='grid grid-cols-1 gap-4 lg:grid-cols-7'>
-              <Card className='col-span-1 lg:col-span-4'>
+            <div className='grid grid-cols-1 gap-4'>
+              <Card className='col-span-1'>
                 <CardHeader>
                   <CardTitle>Overview</CardTitle>
                 </CardHeader>
                 <CardContent className='pl-2'>
                   <Overview />
-                </CardContent>
-              </Card>
-              <Card className='col-span-1 lg:col-span-3'>
-                <CardHeader>
-                  <CardTitle>Recent Plants</CardTitle>
-                  <CardDescription>
-                    Recently planted plants are visible here
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <RecentSales />
                 </CardContent>
               </Card>
             </div>
