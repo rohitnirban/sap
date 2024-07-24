@@ -47,9 +47,9 @@ export default function Page() {
         <ScrollArea className="h-full">
             <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
                 <div>
-                    <h1 className='text-2xl font-bold tracking-tight'> Discover Our Plant Collection</h1>
+                    <h1 className='text-2xl font-bold tracking-tight'>Get Your Plant Images</h1>
                     <p className='text-muted-foreground'>
-                        Explore our diverse range of plants, each with its own unique charm and character.
+                        Explore your plant images with different stages
                     </p>
                 </div>
                 <Separator />

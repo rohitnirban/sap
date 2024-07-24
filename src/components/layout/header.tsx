@@ -12,11 +12,14 @@ import { useSession } from 'next-auth/react';
 
 
 export default function Header() {
+
+  const { data: session } = useSession();
+
   const [userBalance, setUserBalance] = useState([]);
 
   const fetchUserBalance = async () => {
     try {
-      const response = await axios.get(`http://localhost:1000/api/v1/user/balance/rohitnirban`)
+      const response = await axios.get(`http://localhost:1000/api/v1/auth/balance/testing`)
       setUserBalance(response.data.message)
       console.log(response.data.message);
 

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Bell, Image, Heart, MessageCircle, Search, Share } from "lucide-react";
+import { Bell, Image, Heart, MessageCircle, Search, Share, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useState, useRef, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
@@ -28,11 +28,18 @@ export default function Page() {
 
   const { toast } = useToast();
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [isPostLoading, setIsPostLoading] = useState(false);
+
   const { data: session } = useSession();
   const [content, setContent] = useState('');
   const [hashtags, setHashtags] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredPosts, setFilteredPosts] = useState<Posts[]>([]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -51,6 +58,8 @@ export default function Page() {
     if (!content || !hashtags || !image) {
       return;
     }
+
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("content", content);
@@ -93,6 +102,8 @@ export default function Page() {
         description: `Error ${error.message}`,
         variant: "destructive"
       })
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -100,17 +111,30 @@ export default function Page() {
   const [posts, setPosts] = useState<Posts[]>([]);
 
   const fetchPost = async () => {
+    setIsPostLoading(true);
     try {
       const response = await axios.get(`http://localhost:1000/api/v1/community/all`);
       setPosts(response.data.message);
+      setFilteredPosts(response.data.message.reverse());
     } catch (error) {
-
+      console.log(error);
+    } finally {
+      setIsPostLoading(false);
     }
   }
 
   useEffect(() => {
     fetchPost();
   }, [])
+
+  useEffect(() => {
+    setFilteredPosts(
+      posts.filter(post =>
+        post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.hashtags.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  }, [searchQuery, posts]);
 
   if (session) {
     return (
@@ -122,6 +146,8 @@ export default function Page() {
               <Input
                 type="search"
                 placeholder="Search Community"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full rounded-full bg-muted pl-8 pr-4 focus:bg-background focus:outline-none"
               />
             </div>
@@ -174,46 +200,49 @@ export default function Page() {
                       />
                     </div>
                     <Button type="submit" className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
-                      Post
+                      {isLoading ? <Loader2 className="animate-spin mx-auto w-full" /> : 'Post'}
                     </Button>
                   </div>
                 </form>
-                <div className="grid gap-4 max-w-3xl mx-auto">
-                  {posts.map((post, index) => (
-                    <Card key={index} className="border-0">
-                      <div className="flex items-start gap-4 p-4">
-                        <Avatar className="h-10 w-10">
-                          <AvatarImage src={getInitials(post.name)} />
-                          <AvatarFallback>{getInitials(post.name)}</AvatarFallback>
-                        </Avatar>
-                        <div className="flex flex-col">
-                          <div className="flex items-center gap-2">
-                            <div className="text-sm font-medium">{post.name}</div>
-                            {dayjs(post.createdAt).format('MMM D, YYYY h:mm A')}
-                          </div>
-                          <CardContent className="p-0">
-                            <p>{post.content}</p>
-                            <p className="text-blue-700 mt-4">{post.hashtags}</p>
-                            {post.image && (
-                              <img
-                                src={post.image}
-                                alt="Post Image"
-                                width={800}
-                                height={450}
-                                className="rounded-lg mt-4 object-cover w-full aspect-[16/9]"
-                              />
-                            )}
-                          </CardContent>
-                          <CardFooter className="flex items-center justify-between p-0 mt-2">
-                            <Button variant="ghost" size="icon" className="rounded-full">
-                              <Heart className="h-5 w-5" />
-                              <span className="sr-only">Like</span>
-                            </Button>
-                            <Button variant="ghost" size="icon" className="rounded-full">
-                              <MessageCircle className="h-5 w-5" />
-                              <span className="sr-only">Comment</span>
-                            </Button>
-                            <Button variant="ghost" size="icon" className="rounded-full">
+                {isPostLoading ?
+                  <div>
+                    <Loader2 className="animate-spin" />
+                  </div> : <div className="grid gap-4 max-w-3xl mx-auto">
+                    {filteredPosts.map((post, index) => (
+                      <Card key={index} className="border-0">
+                        <div className="flex items-start gap-4 p-4">
+                          <Avatar className="h-10 w-10">
+                            <AvatarImage src={getInitials(post.name)} />
+                            <AvatarFallback>{getInitials(post.name)}</AvatarFallback>
+                          </Avatar>
+                          <div className="flex flex-col">
+                            <div className="flex items-center gap-2">
+                              <div className="text-sm font-medium">{post.name}</div>
+                              {dayjs(post.createdAt).format('MMM D, YYYY h:mm A')}
+                            </div>
+                            <CardContent className="p-0">
+                              <p>{post.content}</p>
+                              <p className="text-blue-700 mt-4">{post.hashtags}</p>
+                              {post.image && (
+                                <img
+                                  src={post.image}
+                                  alt="Post Image"
+                                  width={800}
+                                  height={450}
+                                  className="rounded-lg mt-4 object-cover w-full aspect-[16/9]"
+                                />
+                              )}
+                            </CardContent>
+                            <CardFooter className="flex items-center justify-between p-0 mt-2">
+                              <Button variant="ghost" size="icon" className="rounded-full">
+                                <Heart className="h-5 w-5" />
+                                <span className="sr-only">Like</span>
+                              </Button>
+                              <Button variant="ghost" size="icon" className="rounded-full">
+                                <MessageCircle className="h-5 w-5" />
+                                <span className="sr-only">Comment</span>
+                              </Button>
+                              <Button variant="ghost" size="icon" className="rounded-full">
                                 <Dialog>
                                   <DialogTrigger asChild>
                                     <Button variant="ghost" size="icon">
@@ -247,13 +276,14 @@ export default function Page() {
                                     </div>
                                   </DialogContent>
                                 </Dialog>
-                            </Button>
-                          </CardFooter>
+                              </Button>
+                            </CardFooter>
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
+                      </Card>
+                    ))}
+                  </div>
+                }
               </div>
             </main>
           </div>
@@ -262,36 +292,3 @@ export default function Page() {
     );
   }
 }
-
-const posts = [
-  {
-    avatar: "/placeholder-user.jpg",
-    initials: "AC",
-    name: "Acme Inc",
-    handle: "@acme",
-    time: "1h",
-    content: "Hey everyone! I’m thrilled to share my latest green adventure. Today, I planted a beautiful oak tree in our community park. 🌲 Not only does it provide shade and beauty, but it also plays a vital role in reducing carbon emissions. Did you know that one mature tree can absorb about 48 pounds of CO2 annually? By planting trees, we’re giving back to the planet and fighting climate change. Let’s make our world a greener place, one tree at a time! 🌍💚",
-    hashtags: "#TreePlanting #GoGreen #CarbonReduction #EcoFriendly #ClimateAction",
-    image: "https://lh3.googleusercontent.com/gyqTXLtQHzAzLCZW8La89mCCGQ6ELZbZtjFKORJMiYfe84nEyJanDKYG06-EZFjXRexufZaSsCVeh5iEiR6vg4sIEhNADM-CgHmAulhC=s750"
-  },
-  {
-    avatar: "/placeholder-user.jpg",
-    initials: "AC",
-    name: "Acme Inc",
-    handle: "@acme",
-    time: "2h",
-    content: "Check out my latest contribution to a healthier planet! Here’s a snapshot of me planting a young sapling in my backyard. 🌳 This little guy will grow to be a powerhouse in reducing carbon dioxide in our atmosphere. Trees act as natural air purifiers, and planting them is one of the simplest yet most impactful actions we can take to combat climate change. Together, we can make a big difference. Let’s keep planting and nurturing our green friends! 🍃",
-    hashtags: "#PlantTrees #ReduceCarbonFootprint #EcoWarrior #SustainableLiving #ClimateChange",
-    image: "https://www.rba.go.ke/wp-content/uploads/2023/05/Dr-Shem-Ouma-Director-Research-Strategy-and-Planning-1024x681.jpg"
-  },
-  {
-    avatar: "/placeholder-user.jpg",
-    initials: "AC",
-    name: "Acme Inc",
-    handle: "@acme",
-    time: "3h",
-    content: "Just planted a row of trees along the local riverbank! 🌲 These trees will not only beautify the area but will also significantly contribute to carbon sequestration. Each tree we plant helps absorb CO2, providing cleaner air and a healthier environment for future generations. Let’s all be allies of nature and do our part in the fight against climate change. Every tree counts! 🌳🌎",
-    hashtags: "#EcoHero #TreePlanting #CarbonSequestration #GreenPlanet #NatureLovers #ClimateAction",
-    image: "https://lh3.googleusercontent.com/gyqTXLtQHzAzLCZW8La89mCCGQ6ELZbZtjFKORJMiYfe84nEyJanDKYG06-EZFjXRexufZaSsCVeh5iEiR6vg4sIEhNADM-CgHmAulhC=s750"
-  }
-];
