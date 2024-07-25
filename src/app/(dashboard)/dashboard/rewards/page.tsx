@@ -8,62 +8,32 @@ const data = [
     {
         title: "Plant a Tree for Every Purchase",
         description: "We will plant a tree for every purchase made.",
-        image: "https://media.istockphoto.com/id/1372896722/photo/potted-banana-plant-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=bioeNAo7zEqALK6jvyGlxeP_Y7h6j0QjuWbwY4E_eP8=",
+        image: "https://img.lovepik.com/free-template/bg/20190512/bg/cf11ca9d9f33d.png_detail.jpg!wh650",
         code: "PLANTATREE"
     },
     {
         title: "10% Off on Eco-Friendly Products",
         description: "Get 10% off on all eco-friendly products.",
-        image: "https://media.istockphoto.com/id/1380361370/photo/decorative-banana-plant-in-concrete-vase-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=eYADMQ9dXTz1mggdfn_exN2gY61aH4fJz1lfMomv6o4=",
+        image: "https://cdn.create.vista.com/downloads/3a112b11-dd53-4e91-98d5-d23920ec099f_640.jpeg",
         code: "ECO10"
     },
     {
         title: "Buy One Get One Free on Seedlings",
         description: "Buy one seedling and get another one for free.",
-        image: "https://media.istockphoto.com/id/1540197191/photo/small-tree-growing-with-sunshine-in-garden-eco-concept.webp?b=1&s=170667a&w=0&k=20&c=Z_q6YZRvBSlpoOHnh6y7v4c5zdq7qKyKdH7O9TF343E=",
+        image: "https://www.geelfloricultura.com/media/2023/05/coupon-1.png",
         code: "BOGOSEED"
     },
     {
         title: "Free Tree Care Guide with Purchase",
         description: "Receive a free tree care guide with any purchase.",
-        image: "tree-care-guide.svg",
+        image: "https://marketplace.canva.com/EAFA7rXq4JI/1/0/1131w/canva-green-minimalist-discount-coupon-zLDs5Gq4QpE.jpg",
         code: "FREEGUIDE"
     },
     {
         title: "20% Off on All Gardening Tools",
         description: "Enjoy 20% off on all gardening tools.",
-        image: "gardening-tools.svg",
+        image: "https://thealohahut.com/wp-content/uploads/2024/04/Mothers-Day-Gift-Flower-Coupons_1.webp",
         code: "GARDEN20"
-    },
-    {
-        title: "Free Tree Sapling with Orders Over ₹100",
-        description: "Get a free tree sapling with orders over ₹100.",
-        image: "tree-sapling.svg",
-        code: "FREETREE"
-    },
-    {
-        title: "Join Our Tree Planting Event",
-        description: "Join us for a tree planting event and make a difference.",
-        image: "tree-planting-event.svg",
-        code: "JOINTREE"
-    },
-    {
-        title: "15% Off on Tree Fertilizers",
-        description: "Save 15% on all tree fertilizers.",
-        image: "tree-fertilizer.svg",
-        code: "TREEFERT15"
-    },
-    {
-        title: "Free Tree Health Check-Up",
-        description: "Get a free health check-up for your trees.",
-        image: "tree-health-check.svg",
-        code: "TREECHECK"
-    },
-    {
-        title: "Discount on Tree Pruning Services",
-        description: "Enjoy a discount on our tree pruning services.",
-        image: "tree-pruning.svg",
-        code: "PRUNE20"
     },
 ]
 
@@ -87,7 +57,7 @@ const Page = () => {
                                     alt="Reward Image"
                                     width={400}
                                     height={300}
-                                    className="h-56 w-full object-contain transition-all group-hover:scale-105"
+                                    className="h-56 w-full object-cover transition-all group-hover:scale-105"
                                 />
                                 <div className="p-6">
                                     <h3 className="mb-2 text-xl font-semibold">{reward.title}</h3>
