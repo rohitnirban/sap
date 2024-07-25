@@ -10,22 +10,25 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { base } from '@/lib/base';
+import { Loader2 } from 'lucide-react';
 
 
 export default function Header() {
 
-  const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [userBalance, setUserBalance] = useState([]);
 
   const fetchUserBalance = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(`${base}/api/v1/auth/balance/testing`)
       setUserBalance(response.data.message)
       console.log(response.data.message);
-
     } catch (error: any) {
       console.log(error.message);
+    } finally{
+      setIsLoading(false);
     }
   }
 
@@ -62,7 +65,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <div className="flex items-center space-x-2 bg-gray-100 rounded-full px-4 py-2">
             <IconCurrencyDollar className="h-6 w-6 text-green-500" />
-            <span className="text-lg font-medium text-gray-700">{userBalance} Credits</span>
+            <span className="text-lg font-medium text-gray-700">{isLoading ? <Loader2 className="animate-spin"/>: userBalance} Credits</span>
           </div>
           <UserNav />
           <ThemeToggle />
