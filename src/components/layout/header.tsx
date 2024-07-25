@@ -65,7 +65,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <div className="flex items-center space-x-2 bg-gray-100 rounded-full px-4 py-2">
             <IconCurrencyDollar className="h-6 w-6 text-green-500" />
-            <span className="text-lg font-medium text-gray-700">{isLoading ? <Loader2 className="animate-spin"/>: userBalance} Credits</span>
+            <span className="text-lg font-medium text-gray-700 flex">{isLoading ? <Loader2 className="mr-2 animate-spin"/>: userBalance} Credits</span>
           </div>
           <UserNav />
           <ThemeToggle />
