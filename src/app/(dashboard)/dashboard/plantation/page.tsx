@@ -91,11 +91,6 @@ const Page = () => {
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
     if (!selectedTree || actionClick) {
-      // toast({
-      //   title: 'Failed',
-      //   description: "Please select a tree to plant",
-      //   variant: 'destructive'
-      // });
       return;
     }
 
@@ -167,8 +162,8 @@ const Page = () => {
       setActionClick(false);
     }, 2000);
     toast({
-      title:"Success",
-      description:"Your plant get water"
+      title: "Success",
+      description: "Your plant get water"
     })
   };
 
@@ -177,8 +172,8 @@ const Page = () => {
     setActionClick(true);
     setIsAddingManure(true);
     toast({
-      title:"Success",
-      description:"Your plant get manure"
+      title: "Success",
+      description: "Your plant get manure"
     })
     setTimeout(() => {
       setIsAddingManure(false);
@@ -192,8 +187,8 @@ const Page = () => {
     setActionClick(true);
     setIsAddingPestControl(true);
     toast({
-      title:"Success",
-      description:"Your plant get pest control"
+      title: "Success",
+      description: "Your plant get pest control"
     })
     setTimeout(() => {
       setIsAddingPestControl(false);
@@ -207,8 +202,8 @@ const Page = () => {
     setActionClick(true);
     setIsAddingHumus(true);
     toast({
-      title:"Success",
-      description:"Your plant get humus"
+      title: "Success",
+      description: "Your plant get humus"
     })
     setTimeout(() => {
       setIsAddingHumus(false);
@@ -217,20 +212,39 @@ const Page = () => {
     }, 2000);
   };
 
+  const [fencedMarkers, setFencedMarkers] = useState<number[]>([]);
+
   const handleAddFencingClick = () => {
     if (selectedMarker === null) return;
     setActionClick(true);
     setIsAddingFencing(true);
     toast({
-      title:"Success",
-      description:"Your plant get fencing"
-    })
+      title: "Success",
+      description: "Your plant got fencing"
+    });
+    setFencedMarkers(prev => [...prev, selectedMarker]);
     setTimeout(() => {
       setIsAddingFencing(false);
       setSelectedMarker(null);
       setActionClick(false);
-    }, 2000);
+    }, 100);
   };
+
+
+  // const handleAddFencingClick = () => {
+  //   if (selectedMarker === null) return;
+  //   setActionClick(true);
+  //   setIsAddingFencing(true);
+  //   toast({
+  //     title: "Success",
+  //     description: "Your plant get fencing"
+  //   })
+  //   // setTimeout(() => {
+  //   setIsAddingFencing(false);
+  //   setSelectedMarker(null);
+  //   setActionClick(false);
+  //   // }, 2000);
+  // };
 
   return (
     <div className='-z-10 border-none outline-none'>
@@ -275,6 +289,9 @@ const Page = () => {
                     <AddingHumusAnimationOverlay position={marker} />
                   )}
                   {selectedMarker === index && isAddingFencing && (
+                    <AddingFencingAnimationOverlay position={marker} />
+                  )}
+                  {fencedMarkers.includes(index) && (
                     <AddingFencingAnimationOverlay position={marker} />
                   )}
                 </React.Fragment>
@@ -366,7 +383,7 @@ const ActionsOverlay: React.FC<ActionsOverlayProps> = ({
           <Button className='mt-2 w-full' onClick={onAddHumusClick}>Add Humus</Button>
         </div>
         <div>
-        <Button className='mt-2 w-full' onClick={onAddFencingClick}>Add Fencing</Button>
+          <Button className='mt-2 w-full' onClick={onAddFencingClick}>Add Fencing</Button>
         </div>
       </div>
     </OverlayView>
@@ -460,11 +477,10 @@ const AddingFencingAnimationOverlay: React.FC<AddingFencingAnimationOverlayProps
       position={position}
       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
     >
-      <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }} className='mt-48 -ml-40'>
-        <div className='fencing-animation'>
-          <div className="fence"></div>
-        </div>
+      <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }} className='-mt-4'>
+        <img src="https://png.pngtree.com/png-vector/20220712/ourmid/pngtree-chain-link-fence-realistic-metal-png-image_5885200.png" alt="Fencing" className='h-20 w-20' />
       </div>
     </OverlayView>
   );
 };
+
