@@ -5,7 +5,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Dashboard',
-  description: 'Our Dashboard'
+  description: 'Our Dashboard',
+  icons: {
+    icon: '/logo.png', // Adjust path if necessary
+  },
 };
 
 export default function DashboardLayout({

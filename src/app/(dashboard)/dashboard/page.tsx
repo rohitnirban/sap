@@ -131,37 +131,6 @@ export default function page() {
             </div>
             <div>
               <h1 className='text-3xl font-bold text-center mt-10'>Top Ranker&apos;s</h1>
-              {/* <div className="flex flex-col items-center justify-center gap-8 p-8">
-                <div className="flex flex-col items-center justify-center gap-4 md:flex-row md:gap-8">
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <div className="flex items-center justify-center rounded-full bg-yellow-500 p-4 shadow-lg">
-                      <IconMedal className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="text-center">
-                      <h3 className="text-lg font-bold">Rohit Yadav</h3>
-                      <p className="text-gray-500">Score: 1950</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <div className="flex items-center justify-center rounded-full bg-gray-400 p-4 shadow-lg">
-                      <IconMedal className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="text-center">
-                      <h3 className="text-lg font-bold">Prashant</h3>
-                      <p className="text-gray-500">Score: 1300</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <div className="flex items-center justify-center rounded-full bg-yellow-800 p-4 shadow-lg">
-                      <IconMedal className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="text-center">
-                      <h3 className="text-lg font-bold">Riddhi Dhingra</h3>
-                      <p className="text-gray-500">Score: 1200</p>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
               <Rankings />
             </div>
           </TabsContent>

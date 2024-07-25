@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'VaniKriti',
   description: 'VaniKriti',
+  icons: {
+    icon: '/logo.png', // Adjust path if necessary
+  },
 };
 
 interface RootLayoutProps {
@@ -20,6 +23,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" >
       <AuthProvider>
         <body className={inter.className}>
+          
           {children}
           <Toaster />
         </body>
