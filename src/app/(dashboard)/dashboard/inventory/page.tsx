@@ -67,7 +67,7 @@ export default function Page() {
                   {inventory.map((item, index) => {
                     return <div className="bg-background rounded-lg overflow-hidden shadow-sm transition-all" key={index}>
                       <Link href="#" className="block" prefetch={false}>
-                        <img src={item.image} alt={`plant ${index}`} width={300} height={300} className="w-full h-60 object-cover object-top rounded-lg" />
+                        <img src={item.image} alt={`plant ${index}`} width={300} height={300} className="w-full h-60 object-contain object-center rounded-lg" />
                         <div className="p-4">
                           <h3 className="text-lg font-semibold">{item.name}</h3>
                           <p className="text-muted-foreground text-base mt-1">{item.number} Left</p>

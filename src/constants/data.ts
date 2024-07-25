@@ -160,6 +160,12 @@ export const navItems: NavItem[] = [
     label: 'community'
   },
   {
+    title: 'Plants Insurance',
+    href: '/dashboard/plants-insurance',
+    icon: 'Insurance',
+    label: 'plants-insurance'
+  },
+  {
     title: 'Rewards',
     href: '/dashboard/rewards',
     icon: 'Rewards',

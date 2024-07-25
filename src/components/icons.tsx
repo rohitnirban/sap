@@ -31,6 +31,7 @@ import {
   Pizza,
   Plus,
   Settings,
+  ShieldPlus,
   Sprout,
   SunMedium,
   Trash,
@@ -103,4 +104,5 @@ export const Icons = {
   Inventory:Truck,
   Livestream:IconBrandYoutube,
   Package:Package,
+  Insurance:ShieldPlus
 };

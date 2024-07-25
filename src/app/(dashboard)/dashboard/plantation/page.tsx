@@ -90,12 +90,12 @@ const Page = () => {
   }, []);
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
-    if (!selectedTree) {
-      toast({
-        title: 'Failed',
-        description: "Please select a tree to plant",
-        variant: 'destructive'
-      });
+    if (!selectedTree || actionClick) {
+      // toast({
+      //   title: 'Failed',
+      //   description: "Please select a tree to plant",
+      //   variant: 'destructive'
+      // });
       return;
     }
 
@@ -118,9 +118,11 @@ const Page = () => {
     };
 
     // Check if the clicked position is inside the polygon
-    const isInsidePolygon = google.maps.geometry.poly.containsLocation(
-      new google.maps.LatLng(clickedPosition.lat, clickedPosition.lng),
-      new google.maps.Polygon({ paths })
+    const isInsidePolygon = [paths, paths2, paths3].some(path =>
+      google.maps.geometry.poly.containsLocation(
+        new google.maps.LatLng(clickedPosition.lat, clickedPosition.lng),
+        new google.maps.Polygon({ paths: path })
+      )
     );
 
     if (!isInsidePolygon) {
@@ -145,6 +147,11 @@ const Page = () => {
 
   const [selectedMarker, setSelectedMarker] = useState<number | null>(null);
   const [isWatering, setIsWatering] = useState(false);
+  const [isAddingManure, setIsAddingManure] = useState(false);
+  const [isAddingPestControl, setIsAddingPestControl] = useState(false);
+  const [isAddingHumus, setIsAddingHumus] = useState(false);
+  const [isAddingFencing, setIsAddingFencing] = useState(false);
+  const [actionClick, setActionClick] = useState(false);
 
   const handleMarkerClick = (index: number) => {
     setSelectedMarker(index);
@@ -152,11 +159,77 @@ const Page = () => {
 
   const handleWaterClick = () => {
     if (selectedMarker === null) return; // Ensure a marker is selected
+    setActionClick(true);
     setIsWatering(true);
     setTimeout(() => {
       setIsWatering(false);
       setSelectedMarker(null);
-    }, 10000); // 10 seconds for the animation duration
+      setActionClick(false);
+    }, 2000);
+    toast({
+      title:"Success",
+      description:"Your plant get water"
+    })
+  };
+
+  const handleAddManureClick = () => {
+    if (selectedMarker === null) return;
+    setActionClick(true);
+    setIsAddingManure(true);
+    toast({
+      title:"Success",
+      description:"Your plant get manure"
+    })
+    setTimeout(() => {
+      setIsAddingManure(false);
+      setSelectedMarker(null);
+      setActionClick(false);
+    }, 2000);
+  };
+
+  const handleAddPestControlClick = () => {
+    if (selectedMarker === null) return;
+    setActionClick(true);
+    setIsAddingPestControl(true);
+    toast({
+      title:"Success",
+      description:"Your plant get pest control"
+    })
+    setTimeout(() => {
+      setIsAddingPestControl(false);
+      setSelectedMarker(null);
+      setActionClick(false);
+    }, 2000);
+  };
+
+  const handleAddHumusClick = () => {
+    if (selectedMarker === null) return;
+    setActionClick(true);
+    setIsAddingHumus(true);
+    toast({
+      title:"Success",
+      description:"Your plant get humus"
+    })
+    setTimeout(() => {
+      setIsAddingHumus(false);
+      setSelectedMarker(null);
+      setActionClick(false);
+    }, 2000);
+  };
+
+  const handleAddFencingClick = () => {
+    if (selectedMarker === null) return;
+    setActionClick(true);
+    setIsAddingFencing(true);
+    toast({
+      title:"Success",
+      description:"Your plant get fencing"
+    })
+    setTimeout(() => {
+      setIsAddingFencing(false);
+      setSelectedMarker(null);
+      setActionClick(false);
+    }, 2000);
   };
 
   return (
@@ -179,14 +252,30 @@ const Page = () => {
                     icon={{ url: marker.image, scaledSize: new google.maps.Size(64, 64) }}
                     onClick={() => handleMarkerClick(index)}
                   />
-                  {selectedMarker === index && !isWatering && (
-                    <WaterButtonOverlay
+                  {selectedMarker === index && !isWatering && !isAddingManure && !isAddingPestControl && !isAddingHumus && !isAddingFencing && (
+                    <ActionsOverlay
                       position={marker}
                       onWaterClick={handleWaterClick}
+                      onAddManureClick={handleAddManureClick}
+                      onAddPestControlClick={handleAddPestControlClick}
+                      onAddHumusClick={handleAddHumusClick}
+                      onAddFencingClick={handleAddFencingClick}
                     />
                   )}
                   {selectedMarker === index && isWatering && (
                     <WateringAnimationOverlay position={marker} />
+                  )}
+                  {selectedMarker === index && isAddingManure && (
+                    <AddingManureAnimationOverlay position={marker} />
+                  )}
+                  {selectedMarker === index && isAddingPestControl && (
+                    <AddingPestControlAnimationOverlay position={marker} />
+                  )}
+                  {selectedMarker === index && isAddingHumus && (
+                    <AddingHumusAnimationOverlay position={marker} />
+                  )}
+                  {selectedMarker === index && isAddingFencing && (
+                    <AddingFencingAnimationOverlay position={marker} />
                   )}
                 </React.Fragment>
               ))}
@@ -245,24 +334,44 @@ export default Page;
 
 import { OverlayView } from '@react-google-maps/api';
 
-interface WaterButtonOverlayProps {
+interface ActionsOverlayProps {
   position: google.maps.LatLngLiteral;
   onWaterClick: () => void;
+  onAddManureClick: () => void;
+  onAddPestControlClick: () => void;
+  onAddHumusClick: () => void;
+  onAddFencingClick: () => void;
 }
 
-const WaterButtonOverlay: React.FC<WaterButtonOverlayProps> = ({ position, onWaterClick }) => {
+const ActionsOverlay: React.FC<ActionsOverlayProps> = ({
+  position,
+  onWaterClick,
+  onAddManureClick,
+  onAddPestControlClick,
+  onAddHumusClick,
+  onAddFencingClick
+}) => {
   return (
     <OverlayView
       position={position}
       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
     >
-      <div style={{ position: 'absolute', transform: 'translate(-50%, -100%)' }} className='mt-10'>
-        <Button onClick={onWaterClick}>Water Plant</Button>
+      <div style={{ position: 'absolute', transform: 'translate(-50%, -100%)' }} className='bg-white rounded-xl p-4  mt-32 flex justify-center items-center gap-4'>
+        <div>
+          <Button className='mt-2 w-full' onClick={onWaterClick}>Water Plant</Button>
+          <Button className='mt-2 w-full' onClick={onAddManureClick}>Add Manure</Button>
+        </div>
+        <div>
+          <Button className='mt-2 w-full' onClick={onAddPestControlClick}>Add Pest Control</Button>
+          <Button className='mt-2 w-full' onClick={onAddHumusClick}>Add Humus</Button>
+        </div>
+        <div>
+        <Button className='mt-2 w-full' onClick={onAddFencingClick}>Add Fencing</Button>
+        </div>
       </div>
     </OverlayView>
   );
 };
-
 
 interface WateringAnimationOverlayProps {
   position: google.maps.LatLngLiteral;
@@ -278,6 +387,82 @@ const WateringAnimationOverlay: React.FC<WateringAnimationOverlayProps> = ({ pos
         <div className='watering-animation'>
           <div className="water-jar"></div>
           <div className="water"></div>
+        </div>
+      </div>
+    </OverlayView>
+  );
+};
+
+interface AddingManureAnimationOverlayProps {
+  position: google.maps.LatLngLiteral;
+}
+
+const AddingManureAnimationOverlay: React.FC<AddingManureAnimationOverlayProps> = ({ position }) => {
+  return (
+    <OverlayView
+      position={position}
+      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+    >
+      <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }} className='mt-48 -ml-40'>
+        <div className='manure-animation'>
+          <div className="manure"></div>
+        </div>
+      </div>
+    </OverlayView>
+  );
+};
+
+interface AddingPestControlAnimationOverlayProps {
+  position: google.maps.LatLngLiteral;
+}
+
+const AddingPestControlAnimationOverlay: React.FC<AddingPestControlAnimationOverlayProps> = ({ position }) => {
+  return (
+    <OverlayView
+      position={position}
+      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+    >
+      <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }} className='mt-48 -ml-40'>
+        <div className='pest-control-animation'>
+          <div className="pest-control"></div>
+        </div>
+      </div>
+    </OverlayView>
+  );
+};
+
+interface AddingHumusAnimationOverlayProps {
+  position: google.maps.LatLngLiteral;
+}
+
+const AddingHumusAnimationOverlay: React.FC<AddingHumusAnimationOverlayProps> = ({ position }) => {
+  return (
+    <OverlayView
+      position={position}
+      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+    >
+      <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }} className='mt-48 -ml-40'>
+        <div className='humus-animation'>
+          <div className="humus"></div>
+        </div>
+      </div>
+    </OverlayView>
+  );
+};
+
+interface AddingFencingAnimationOverlayProps {
+  position: google.maps.LatLngLiteral;
+}
+
+const AddingFencingAnimationOverlay: React.FC<AddingFencingAnimationOverlayProps> = ({ position }) => {
+  return (
+    <OverlayView
+      position={position}
+      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+    >
+      <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }} className='mt-48 -ml-40'>
+        <div className='fencing-animation'>
+          <div className="fence"></div>
         </div>
       </div>
     </OverlayView>

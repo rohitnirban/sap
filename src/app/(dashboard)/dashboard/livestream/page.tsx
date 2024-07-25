@@ -37,7 +37,7 @@ interface YT {
 }
 
 const Page: React.FC = () => {
-    const videoId = 'U8sDMzTeuQ4'
+    const videoId = 'WCUtruXyrc0'
     const playerRef = useRef<YT.Player | null>(null);
     const [isMuted, setIsMuted] = useState(false);
 

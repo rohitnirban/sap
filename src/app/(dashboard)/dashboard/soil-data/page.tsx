@@ -21,35 +21,25 @@ interface SoilData {
 
 const plants = [
     {
-        credits: 20,
-        image: "https://indian-oil-admin.pages.dev/assets/redwood-DWkzg1OA.png",
-        name: "Fiddle-Leaf Fig",
-        details: "Rohit Yadav"
-    },
-    {
         credits: 40,
-        image: "https://indian-oil-admin.pages.dev/assets/eucalyptus-f7xDpF3W.png",
-        name: "Snake Plant",
-        details: "Prashant"
+        image: "https://res.cloudinary.com/dpagdxk01/image/upload/v1721824898/productpage-removebg-preview_wkmqy4.png",
+        name: "JackFruit Tree"
     },
     {
-        credits: 10,
-        image: "https://indian-oil-admin.pages.dev/assets/palm_tree-DBSb2Bct.png",
-        name: "Pothos",
-        details: "Ashit Rai"
+        credits: 45,
+        image: "https://res.cloudinary.com/dpagdxk01/image/upload/v1721824898/cartoon-plane-swietenia-macrophylla-shrub-tree-swietenia-mahagoni-woody-plant-hedge-mahogany-png-clipart-removebg-preview_trb5yf.png",
+        name: "Mahogany Tree",
+    },
+    {
+        credits: 50,
+        image: "https://res.cloudinary.com/dpagdxk01/image/upload/v1721824898/lovepik-tree-png-image_400189300_wh1200-removebg-preview_po9sjt.png",
+        name: "Teak Tree",
     },
     {
         credits: 35,
-        image: "https://indian-oil-admin.pages.dev/assets/bamboo-DlBsA3cp.png",
-        name: "ZZ Plant",
-        details: "Kapil Gangwar"
+        image: "https://res.cloudinary.com/dpagdxk01/image/upload/v1721824898/images-removebg-preview_kdbtsj.png",
+        name: "Ashoka Tree",
     },
-    {
-        credits: 25,
-        image: "https://indian-oil-admin.pages.dev/assets/oak-3F-t3icQ.png",
-        name: "Peace Lily",
-        details: "Rohit Yadav"
-    }
 ]
 
 export default function Apps() {
@@ -101,72 +91,12 @@ export default function Apps() {
                                         <img src={plant.image} alt={`plant ${index}`} width={300} height={300} className="w-full h-60 object-contain" />
                                         <div className="p-4">
                                             <h3 className="text-lg font-semibold">{plant.name}</h3>
-                                            <p className="text-muted-foreground text-sm mt-1"><span className="font-bold text-black">Planted By</span> {plant.details}</p>
                                             <Dialog>
                                                 <DialogTrigger asChild>
                                                     <Button className='w-full'>Get Details</Button>
                                                 </DialogTrigger>
                                                 <DialogContent>
                                                     <ul className='no-scrollbar grid gap-4 p-4 grid-cols-1'>
-                                                        {/* {data.map((item, index) => (
-                                                <li
-                                                key={index}
-                                                className={`${item.condition === 'good'
-                                                ? 'bg-green-300'
-                                                : item.condition === 'bad'
-                                                ? 'bg-red-300'
-                                                            : 'bg-yellow-300'
-                                                            } grid items-center rounded-lg border p-4 hover:shadow-md md:grid-cols-2 lg:grid-cols-3`}
-                                                            >
-                                                            <div className='p-4 text-center'>
-                                                            <h1
-                                                            className={`text-2xl font-bold ${item.condition === 'good'
-                                                            ? 'text-green-500'
-                                                            : item.condition === 'bad'
-                                                            ? 'text-red-500'
-                                                            : 'text-yellow-600'
-                                                            }`}
-                                                            >
-                                                            {item.condition.charAt(0).toUpperCase() +
-                                                            item.condition.slice(1)}
-                                                        </h1>
-                                                        <h2>Condition</h2>
-                                                        </div>
-                                                        <div className='p-4 text-center'>
-                                                        <h1 className='text-2xl font-bold'>
-                                                            {item.moisture.toFixed(2)}
-                                                            </h1>
-                                                            <h2 className='text-xl font-bold'>%</h2>
-                                                            <h3>Moisture&nbsp;(%)</h3>
-                                                            </div>
-                                                            <div className='p-4 text-center'>
-                                                            <h1 className='text-2xl font-bold'>{item.pH.toFixed(2)}</h1>
-                                                            <h2 className='text-xl font-bold'>pH</h2>
-                                                            <h3>pH</h3>
-                                                            </div>
-                                                    <div className='p-4 text-center'>
-                                                        <h1 className='text-2xl font-bold'>
-                                                            {item.salinity.toFixed(2)}
-                                                        </h1>
-                                                        <h2 className='text-xl font-bold'>ms/cm</h2>
-                                                        <h3>Salinity&nbsp;(mS/cm)</h3>
-                                                        </div>
-                                                        <div className='p-4 text-center'>
-                                                        <h1 className='text-2xl font-bold'>
-                                                        {item.temperature.toFixed(2)}
-                                                        </h1>
-                                                        <h2 className='text-xl font-bold'>°C</h2>
-                                                        <h3>Temperature&nbsp;(°C)</h3>
-                                                        </div>
-                                                        <div className='p-4 text-center'>
-                                                        <h1 className='text-2xl font-bold'>
-                                                        {item.nutrient.toFixed(2)}
-                                                        </h1>
-                                                        <h2 className='text-xl font-bold'>ppm</h2>
-                                                        <h3>Nutrient&nbsp;(ppm)</h3>
-                                                        </div>
-                                                        </li>
-                                                        ))} */}
                                                         <li className='grid items-center rounded-lg border bg-red-300 p-4 hover:shadow-md md:grid-cols-2 lg:grid-cols-3 w-full'>
                                                             <div className='p-4 text-center'>
                                                                 <h1 className='text-2xl font-bold text-red-500'>Bad</h1>
