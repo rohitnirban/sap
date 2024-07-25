@@ -72,8 +72,44 @@ export default function Page() {
 
     } catch (error: any) {
       console.log(error.message);
+      toast({
+        title: "Failed",
+        description: error.response?.data.message || "An error occurred",
+        variant: "destructive",
+      });
     }
   }
+
+  const [isVideoCompleted, setIsVideoCompleted] = useState(false);
+
+  const handleVideoEnd = async () => {
+    setIsVideoCompleted(true);
+    try {
+      const response = await axios.post(`${base}/api/v1/auth/add/credits/testing/10`);
+      toast({
+        title: "Success",
+        description: response.data.message,
+      });
+      window.location.reload();
+      fetchCreditHistory();
+    } catch (error: any) {
+      console.error(error);
+      toast({
+        title: "Failed",
+        description: error.response?.data.message || "An error occurred",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleVideoAbort = () => {
+    if (!isVideoCompleted) {
+      toast({
+        title: "Error",
+        description: "Please complete the video first."
+      });
+    }
+  };
 
   useEffect(() => {
     fetchUserBalance()
@@ -98,7 +134,29 @@ export default function Page() {
                   Add Money
                 </DialogTitle>
                 <div className="p-4 flex justify-around items-center">
-                  <Button>Watch Advertisement</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button>Watch Advertisement</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogTitle>
+                        Watch Advertisement
+                      </DialogTitle>
+                      <div className="">
+                        <video
+                          className="border-4 border-gray-300 rounded-md shadow-lg"
+                          width="800"
+                          height="500"
+                          autoPlay={true}
+                          onEnded={handleVideoEnd}
+                          onAbort={handleVideoAbort}
+                        >
+                          <source src="/1.mp4" type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button>Through Bank or UPI</Button>
