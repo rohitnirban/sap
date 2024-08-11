@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# VaniKriti: Virtual Plant Care Platform
 
-## Getting Started
+## Overview
 
-First, run the development server:
+**Website:** [VaniKriti](https://sap-two.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+VaniKriti is an innovative platform that allows users to virtually purchase, plant, and care for plants in a designated area on a map. This project is currently in the prototype phase, providing a comprehensive and engaging experience for plant enthusiasts, environmentalists, and anyone interested in virtual gardening.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. **Virtual Planting on a Map**
+- **Purchase Plants:** Users can browse a selection of plants available on the platform. Each plant comes with detailed information about its species, growth conditions, and care needs.
+- **Planting on a Map:** Once purchased, users can plant their chosen plant virtually on a specific area of a map provided on the platform. This feature allows users to simulate the experience of planting in real-world locations.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 2. **Plant Care Services**
+- **Watering:** Users can opt to water their virtual plants at regular intervals to ensure their growth and health.
+- **Pest Control:** Protect your plants from virtual pests by purchasing pest control services.
+- **Manure and Humus:** Enhance the fertility of your plant's soil by applying manure and humus. These services are available for purchase to simulate the nurturing process.
 
-## Learn More
+### 3. **Dashboard with Plant Stats**
+- **Growth Tracking:** Users can view detailed statistics about their plants' growth over time, including health indicators, growth stages, and more.
+- **Performance Analytics:** Get insights into how well your plant is thriving based on the care you provide, environmental factors, and more.
 
-To learn more about Next.js, take a look at the following resources:
+### 4. **Plant Images**
+- **Real-Time Imagery:** Users receive images of their plants that reflect their current virtual state. This feature adds a visual aspect to the plant care experience, making it more immersive.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 5. **Community Interaction**
+- **Posting and Sharing:** Users can interact with others in the community by posting updates, tips, and experiences related to their virtual plants. This fosters a sense of community and shared learning among users.
+- **Discussion Forums:** Engage in discussions with other plant enthusiasts, share advice, and participate in group activities or challenges.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 6. **Plant Insurance**
+- **Protection Plans:** Users can purchase insurance for their plants to protect against virtual damage or loss. This service ensures that your investment in your virtual plant is safeguarded.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
