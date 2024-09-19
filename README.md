@@ -1,4 +1,4 @@
-# VaniKriti: Virtual Plant Care Platform
+# VaniKriti: Plant Care Platform
 
 ## Overview
 
