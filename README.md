@@ -26,9 +26,9 @@ VaniKriti is an innovative platform that allows users to virtually purchase, pla
 
 ### 5. **Community Interaction**
 - **Posting and Sharing:** Users can interact with others in the community by posting updates, tips, and experiences related to their virtual plants. This fosters a sense of community and shared learning among users.
-- **Discussion Forums:** Engage in discussions with other plant enthusiasts, share advice, and participate in group activities or challenges.
+- **Discussion Forums:** Engage with other plant enthusiasts, share advice, and participate in group activities or challenges.
 
 ### 6. **Plant Insurance**
-- **Protection Plans:** Users can purchase insurance for their plants to protect against virtual damage or loss. This service ensures that your investment in your virtual plant is safeguarded.
+- **Protection Plans:** Users can purchase plant insurance to protect against virtual damage or loss. This service ensures that your investment in your virtual plant is safeguarded.
 
 
